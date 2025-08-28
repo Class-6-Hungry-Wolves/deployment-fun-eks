@@ -28,6 +28,12 @@ output "openid_connect_provider" {
   }
 }
 
-
+output "ecr_repo_uris" {
+  value = {
+    app_1 = aws_ecr_repository.app_1.repository_url
+    app_2 = aws_ecr_repository.app_2.repository_url
+    app_3 = aws_ecr_repository.app_3.repository_url
+  }
+}
 
 

@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ header_text }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 2rem; }
+      img { max-width: 480px; height: auto; display: block; margin-top: 1rem; }
+    </style>
+  </head>
+  <body>
+    <h1>{{ header_text }}</h1>
+    {% if image_url %}
+      <img src="{{ image_url }}" alt="image" />
+    {% else %}
+      <p>No IMAGE_URL provided.</p>
+    {% endif %}
+  </body>
+</html>

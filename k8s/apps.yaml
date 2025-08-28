@@ -1,0 +1,133 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apps
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-1
+  namespace: apps
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: app-1 } }
+  template:
+    metadata: { labels: { app: app-1 } }
+    spec:
+      containers:
+        - name: app-1
+          image: 980921712667.dkr.ecr.us-east-1.amazonaws.com/app-1:latest
+          ports:
+            - containerPort: 8081
+          env:
+            - name: PORT
+              value: "8081"
+            - name: HEADER_TEXT
+              value: "Hello from app-1"
+            - name: IMAGE_URL
+              value: "https://upload.wikimedia.org/wikipedia/commons/5/5b/Lizzo_%2832739336844%29.jpg"
+          readinessProbe:
+            httpGet: { path: /health, port: 8081 }
+            initialDelaySeconds: 3
+          livenessProbe:
+            httpGet: { path: /health, port: 8081 }
+            initialDelaySeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-1
+  namespace: apps
+spec:
+  type: LoadBalancer
+  selector: { app: app-1 }
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8081
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-2
+  namespace: apps
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: app-2 } }
+  template:
+    metadata: { labels: { app: app-2 } }
+    spec:
+      containers:
+        - name: app-2
+          image: 980921712667.dkr.ecr.us-east-1.amazonaws.com/app-2:latest
+          ports:
+            - containerPort: 8082
+          env:
+            - name: PORT
+              value: "8082"
+            - name: HEADER_TEXT
+              value: "Hello from app-2"
+            - name: IMAGE_URL
+              value: "https://upload.wikimedia.org/wikipedia/commons/6/61/Lizzo_performing_at_Boston_Calling%2C_2016.jpg"
+          readinessProbe:
+            httpGet: { path: /health, port: 8082 }
+            initialDelaySeconds: 3
+          livenessProbe:
+            httpGet: { path: /health, port: 8082 }
+            initialDelaySeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-2
+  namespace: apps
+spec:
+  type: LoadBalancer
+  selector: { app: app-2 }
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8082
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-3
+  namespace: apps
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: app-3 } }
+  template:
+    metadata: { labels: { app: app-3 } }
+    spec:
+      containers:
+        - name: app-3
+          image: 980921712667.dkr.ecr.us-east-1.amazonaws.com/app-3:latest
+          ports:
+            - containerPort: 8083
+          env:
+            - name: PORT
+              value: "8083"
+            - name: HEADER_TEXT
+              value: "Hello from app-3"
+            - name: IMAGE_URL
+              value: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Lizzo_at_the_2019_American_Music_Awards.png"
+          readinessProbe:
+            httpGet: { path: /health, port: 8083 }
+            initialDelaySeconds: 3
+          livenessProbe:
+            httpGet: { path: /health, port: 8083 }
+            initialDelaySeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-3
+  namespace: apps
+spec:
+  type: LoadBalancer
+  selector: { app: app-3 }
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8083
