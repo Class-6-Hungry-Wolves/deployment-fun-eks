@@ -2,11 +2,11 @@
 
 A comprehensive Amazon EKS deployment project that demonstrates infrastructure as code using Terraform, containerized application deployment, and Kubernetes orchestration.
 
-## 📋 Overview
+## Overview
 
 This repository provides a complete end-to-end solution for deploying applications on Amazon EKS (Elastic Kubernetes Service). It includes infrastructure provisioning with Terraform, container image building and pushing to ECR, and Kubernetes deployment configurations.
 
-## 🏗️ Architecture
+## Architecture
 
 The project implements the following components:
 
@@ -16,7 +16,7 @@ The project implements the following components:
 - **Kubernetes Manifests**: Application deployment configurations
 - **Shell Scripts**: Automation for build and deployment processes
 
-## 🚀 Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have the following installed and configured:
 
@@ -178,7 +178,7 @@ kubectl describe service <service-name>
    - Verify ECR repository exists and images are pushed
    - Check IAM permissions for EKS worker nodes to access ECR
 
-## 🧹 Cleanup
+## Cleanup
 
 To avoid ongoing AWS charges, clean up resources when done:
 
